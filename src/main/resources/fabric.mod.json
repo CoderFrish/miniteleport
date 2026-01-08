@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "MiniTeleport",
   "description": "Minimal zero-configuration server-side teleport commands.",
-  "authors": ["luxmiyu"],
+  "authors": ["luxmiyu", "CoderFrish"],
   "contact": {},
   "license": "MIT",
   "icon": "assets/miniteleport/icon.png",

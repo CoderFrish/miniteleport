@@ -531,80 +531,92 @@ public class MiniTeleport implements ModInitializer {
             })
         );
 
-        dispatcher.register(CommandManager.literal("setwarp")
-            .requires(PERMISSIONS_ADMIN)
-            .then(CommandManager.argument("name", StringArgumentType.word()).executes(context -> {
-                ServerPlayerEntity player = getPlayer(context.getSource());
+        if (false) {
+            dispatcher.register(CommandManager.literal("setwarp")
+                    .requires(PERMISSIONS_ADMIN)
+                    .then(CommandManager.argument("name", StringArgumentType.word()).executes(context -> {
+                        ServerPlayerEntity player = getPlayer(context.getSource());
 
-                String warpName = StringArgumentType.getString(context, "name");
-                setWarp(warpName, player, null);
+                        String warpName = StringArgumentType.getString(context, "name");
+                        setWarp(warpName, player, null);
 
-                player.sendMessage(Text.literal(String.format("Warp %s set!", warpName)).formatted(Formatting.AQUA),
-                    false);
-                return 1;
-            }))
-        );
+                        player.sendMessage(Text.literal(String.format("Warp %s set!", warpName)).formatted(Formatting.AQUA),
+                                false);
+                        return 1;
+                    }))
+            );
+        }
 
-        dispatcher.register(CommandManager.literal("delwarp")
-            .requires(PERMISSIONS_ADMIN)
-            .then(CommandManager.argument("name", StringArgumentType.word())
-                .suggests(suggestWarps(false))
-                .executes(context -> {
-                    ServerPlayerEntity player = getPlayer(context.getSource());
+        if (false) {
+            dispatcher.register(CommandManager.literal("delwarp")
+                    .requires(PERMISSIONS_ADMIN)
+                    .then(CommandManager.argument("name", StringArgumentType.word())
+                            .suggests(suggestWarps(false))
+                            .executes(context -> {
+                                ServerPlayerEntity player = getPlayer(context.getSource());
 
-                    String warpName = StringArgumentType.getString(context, "name");
-                    return delWarp(warpName, player, null);
-                })
-            )
-        );
+                                String warpName = StringArgumentType.getString(context, "name");
+                                return delWarp(warpName, player, null);
+                            })
+                    )
+            );
+        }
 
-        dispatcher.register(CommandManager.literal("warp")
-            .requires(PERMISSIONS_NORMAL)
-            .then(CommandManager.argument("name", StringArgumentType.word())
-                .suggests(suggestWarps(false))
-                .executes(context -> {
-                    ServerPlayerEntity player = getPlayer(context.getSource());
-                    String warpName = StringArgumentType.getString(context, "name");
-                    return warpPlayer(player, getWarp(getServer(context), warpName, null));
-                })
-            )
-        );
+        if (false) {
+            dispatcher.register(CommandManager.literal("warp")
+                    .requires(PERMISSIONS_NORMAL)
+                    .then(CommandManager.argument("name", StringArgumentType.word())
+                            .suggests(suggestWarps(false))
+                            .executes(context -> {
+                                ServerPlayerEntity player = getPlayer(context.getSource());
+                                String warpName = StringArgumentType.getString(context, "name");
+                                return warpPlayer(player, getWarp(getServer(context), warpName, null));
+                            })
+                    )
+            );
+        }
 
-        dispatcher.register(CommandManager.literal("warps")
-            .requires(PERMISSIONS_NORMAL)
-            .executes(context -> {
-                ServerPlayerEntity player = getPlayer(context.getSource());
-                player.sendMessage(listWarps(getServer(context), null), false);
-                return 1;
-            }));
+        if (false) {
+            dispatcher.register(CommandManager.literal("warps")
+                    .requires(PERMISSIONS_NORMAL)
+                    .executes(context -> {
+                        ServerPlayerEntity player = getPlayer(context.getSource());
+                        player.sendMessage(listWarps(getServer(context), null), false);
+                        return 1;
+                    }));
+        }
 
-        dispatcher.register(CommandManager.literal("setspawn")
-            .requires(PERMISSIONS_ADMIN)
-            .executes(context -> {
-                ServerPlayerEntity player = getPlayer(context.getSource());
-                setWarp("spawn", player, null);
+        if (false) {
+            dispatcher.register(CommandManager.literal("setspawn")
+                    .requires(PERMISSIONS_ADMIN)
+                    .executes(context -> {
+                        ServerPlayerEntity player = getPlayer(context.getSource());
+                        setWarp("spawn", player, null);
 
-                ServerWorld world = player.getEntityWorld();
-                world.setSpawnPoint(WorldProperties.SpawnPoint.create(
-                    player.getEntityWorld().getRegistryKey(),
-                    player.getBlockPos(),
-                    0,
-                    0
-                ));
-                world.getServer().getGameRules().get(GameRules.SPAWN_RADIUS).set(0, world.getServer());
+                        ServerWorld world = player.getEntityWorld();
+                        world.setSpawnPoint(WorldProperties.SpawnPoint.create(
+                                player.getEntityWorld().getRegistryKey(),
+                                player.getBlockPos(),
+                                0,
+                                0
+                        ));
+                        world.getServer().getGameRules().get(GameRules.SPAWN_RADIUS).set(0, world.getServer());
 
-                player.sendMessage(Text.literal("Spawn set!").formatted(Formatting.AQUA), false);
-                return 1;
-            })
-        );
+                        player.sendMessage(Text.literal("Spawn set!").formatted(Formatting.AQUA), false);
+                        return 1;
+                    })
+            );
+        }
 
-        dispatcher.register(CommandManager.literal("spawn")
-            .requires(PERMISSIONS_NORMAL)
-            .executes(context -> {
-                ServerPlayerEntity player = getPlayer(context.getSource());
-                return warpPlayer(player, getWarp(getServer(context), "spawn", null));
-            })
-        );
+        if (false) {
+            dispatcher.register(CommandManager.literal("spawn")
+                    .requires(PERMISSIONS_NORMAL)
+                    .executes(context -> {
+                        ServerPlayerEntity player = getPlayer(context.getSource());
+                        return warpPlayer(player, getWarp(getServer(context), "spawn", null));
+                    })
+            );
+        }
 
         dispatcher.register(CommandManager.literal("tpa")
             .then(CommandManager.argument("target", EntityArgumentType.player())
